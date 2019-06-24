@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { switchMap } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { AppService } from './app.service';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
   styleUrls: [ './app.component.css' ]
 })
-export class AppComponent implements OnInit  {
+export class AppComponent implements OnInit, OnDestroy  {
   name = 'Angular';
+  destory$ = new Subject();
   
   constructor(
     private http: HttpClient,
@@ -16,9 +18,15 @@ export class AppComponent implements OnInit  {
   ) {
 
   }
+  ngOnDestroy() {
+    this.destory$.next();
+    this.destory$.complete();
+  }
+
   ngOnInit() {
     this.appService.click$.pipe(
-      switchMap(e => this.getData())
+      switchMap(e => this.getData()),
+      takeUntil(this.destory$)
     ).subscribe(data => {
       console.log(data);
     })
