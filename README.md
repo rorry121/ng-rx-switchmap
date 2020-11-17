@@ -3,6 +3,6 @@
 [Edit on StackBlitz ⚡️](https://stackblitz.com/edit/ng-rx-switchmap)
 <p align="center">
   <a href="https://www.rorry.cn/ng-hertz">
-    <img width="244" src="http://rorry.cn/osp/svg/hertz-logo.svg">
+    <img width="244" src="https://rorry.cn/osp/svg/hertz-logo.svg">
   </a>
 </p>
